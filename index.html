@@ -20,6 +20,8 @@
                 width: 85%;
                 display: flex;
                 justify-content: center;
+                flex-direction: column;
+                align-items: center;
             }
 
             #videoList li {
@@ -53,6 +55,7 @@
             </div>
 
             <div class="video">
+                <button id="showImageBtn">Toon afbeelding</button>
                 <img id="defaultImage" src="https://mudmasters.nl/wp-content/uploads/2023/05/Parcoursplattegrond-Haarlemmermeer-2023-website-scaled.jpg" style="max-width: 70%; height: 70%; display: none;">
                 <iframe id="videoPlayer" width="1200" height="800" src="" frameborder="0" allowfullscreen style="display: none;"></iframe>
                 <p id="textDisplay" style="display: none;"></p>
@@ -82,21 +85,22 @@
                 {"name": "18 4 WHEEL DRIVE", "url": "https://www.facebook.com/video/embed?video_id=844384859433794"},
                 {"name": "19 LOAD CARRY", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=98&autoplay=1"},
                 {"name": "20 LIFE LINE", "url": "", "text": "Niet gevonden, wordt een verrassing!"},
-				{"name": "21 HANG OUT", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=115&autoplay=1"},
-				{"name": "22 TYRE FLIPS", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=110&autoplay=1"},
-				{"name": "23 CAPSIZE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=104&autoplay=1"},
-				{"name": "24 BUDDY CARRY", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=84&autoplay=1"},
-				{"name": "25 SUBMARINE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=129&autoplay=1"},
-				{"name": "26 INDIANNA BRIDGE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=77&autoplay=1"},
-				{"name": "27 WOOD BALANCE", "url": "", "text": "Niet gevonden, wordt een verrassing!"},
-				{"name": "28 EXECUTION + EXECUTION BLACKOUT", "url": "https://www.youtube.com/embed/oZBz_ZQfnxU?start=122&autoplay=1"},
-		    		{"name": "Parcoursplattegrond 2023", "url": "https://mudmasters.nl/wp-content/uploads/2023/05/Parcoursplattegrond-Haarlemmermeer-2023-website-scaled.jpg"},
+                {"name": "21 HANG OUT", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=115&autoplay=1"},
+                {"name": "22 TYRE FLIPS", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=110&autoplay=1"},
+                {"name": "23 CAPSIZE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=104&autoplay=1"},
+                {"name": "24 BUDDY CARRY", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=84&autoplay=1"},
+                {"name": "25 SUBMARINE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=129&autoplay=1"},
+                {"name": "26 INDIANNA BRIDGE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=77&autoplay=1"},
+                {"name": "27 WOOD BALANCE", "url": "", "text": "Niet gevonden, wordt een verrassing!"},
+                {"name": "28 EXECUTION + EXECUTION BLACKOUT", "url": "https://www.youtube.com/embed/oZBz_ZQfnxU?start=122&autoplay=1"},
+                {"name": "Parcoursplattegrond 2023", "url": "https://mudmasters.nl/wp-content/uploads/2023/05/Parcoursplattegrond-Haarlemmermeer-2023-website-scaled.jpg"},
             ];
 
             var videoList = document.getElementById("videoList");
             var videoPlayer = document.getElementById("videoPlayer");
             var defaultImage = document.getElementById("defaultImage");
             var textDisplay = document.getElementById("textDisplay");
+            var showImageBtn = document.getElementById("showImageBtn");
 
             defaultImage.style.display = "block";
 
@@ -117,6 +121,12 @@
                     }
                 });
                 videoList.appendChild(li);
+            });
+
+            showImageBtn.addEventListener("click", function() {
+                defaultImage.style.display = "block";
+                videoPlayer.style.display = "none";
+                textDisplay.style.display = "none";
             });
         </script>
     </body>
