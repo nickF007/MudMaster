@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Je pagina titel</title>
+        <style>
+            body, header {
+                margin: 10;
+                padding: 100;
+            }
+
+            .content {
+                display: flex;
+            }
+
+            .list {
+                width: 15%;
+            }
+
+            .video {
+                width: 85%;
+                display: flex;
+                justify-content: center;
+            }
+
+            #videoList li {
+                padding: 10px;
+                margin-bottom: 10px;
+                background-color: #ddd;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            #videoList li:hover {
+                background-color: #bbb;
+            }
+
+            header img {
+                margin-left: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img src="https://www.welivehealthy.nl/assets/files/final-jpg.webp" alt="Logo" style="width:200px;">
+        </header>
+
+        <div class="content">
+            <div class="list">
+                <ul id="videoList">
+                    <!-- De video's worden hier dynamisch toegevoegd -->
+                </ul>
+            </div>
+
+            <div class="video">
+                <img id="defaultImage" src="https://mudmasters.nl/wp-content/uploads/2023/05/Parcoursplattegrond-Haarlemmermeer-2023-website-scaled.jpg" style="max-width: 70%; height: 70%; display: none;">
+                <iframe id="videoPlayer" width="1200" height="800" src="" frameborder="0" allowfullscreen style="display: none;"></iframe>
+                <p id="textDisplay" style="display: none;"></p>
+            </div>
+        </div>
+
+        <script>
+            var videos = [
+                {"name": "0 Alle hindernissen 2021", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?autoplay=1"},
+                {"name": "1 BEAT THE PYRAMID", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=40&autoplay=1"},
+                {"name": "2 TOETANCHAMON STEPS", "url": "https://www.facebook.com/video/embed?video_id=1270555003001296"},
+                {"name": "3 UP & UNDER", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=7&autoplay=1"},
+                {"name": "4 WALK THE PLANK", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=125&autoplay=1"},
+                {"name": "5 UNDER PRESSURE", "url": "https://mudmasters.com/news/new-obstacles-2023/"},
+                {"name": "6 SIZZLER", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=65&autoplay=1"},
+                {"name": "7 TRENCHES", "url": "https://www.youtube.com/embed/ORyeIMPx6cYH?start=10&autoplay=1"},
+                {"name": "8 MONKEY BARS", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=34&autoplay=1"},
+                {"name": "9 FLYER", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=57&autoplay=1"},
+                {"name": "10 GREAT WALLS", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=53&autoplay=1"},
+                {"name": "11 BRAIN FREEZE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=45&autoplay=1"},
+                {"name": "12 POWER TOUWER", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=19&autoplay=1"},
+                {"name": "13 TARZAN SWING", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=24&autoplay=1"},
+                {"name": "14 MUD CRAWL", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=29&autoplay=1"},
+                {"name": "15 MUD POOL", "url": "", "text": "Direct na de MUD CRAWL"},
+                {"name": "16 WATER DIP", "url": "", "text": "Direct na de MUD POOL (ben je weer beetje schoon)"},
+                {"name": "17 PIPE RUNNER", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=70&autoplay=1"},
+                {"name": "18 4 WHEEL DRIVE", "url": "https://www.facebook.com/video/embed?video_id=844384859433794"},
+                {"name": "19 LOAD CARRY", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=98&autoplay=1"},
+                {"name": "20 LIFE LINE", "url": "", "text": "Niet gevonden, wordt een verrassing!"},
+				{"name": "21 HANG OUT", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=115&autoplay=1"},
+				{"name": "22 TYRE FLIPS", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=110&autoplay=1"},
+				{"name": "23 CAPSIZE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=104&autoplay=1"},
+				{"name": "24 BUDDY CARRY", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=84&autoplay=1"},
+				{"name": "25 SUBMARINE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=129&autoplay=1"},
+				{"name": "26 INDIANNA BRIDGE", "url": "https://www.youtube.com/embed/ORyeIMPx6cY?start=77&autoplay=1"},
+				{"name": "27 WOOD BALANCE", "url": "", "text": "Niet gevonden, wordt een verrassing!"},
+				{"name": "28 EXECUTION + EXECUTION BLACKOUT", "url": "https://www.youtube.com/embed/oZBz_ZQfnxU?start=122&autoplay=1"}
+            ];
+
+            var videoList = document.getElementById("videoList");
+            var videoPlayer = document.getElementById("videoPlayer");
+            var defaultImage = document.getElementById("defaultImage");
+            var textDisplay = document.getElementById("textDisplay");
+
+            defaultImage.style.display = "block";
+
+            videos.forEach(function(video, index) {
+                var li = document.createElement("li");
+                li.textContent = video.name;
+                li.addEventListener("click", function() {
+                    if (video.url) {
+                        defaultImage.style.display = "none";
+                        videoPlayer.style.display = "block";
+                        textDisplay.style.display = "none";
+                        videoPlayer.src = video.url;
+                    } else {
+                        defaultImage.style.display = "none";
+                        videoPlayer.style.display = "none";
+                        textDisplay.style.display = "block";
+                        textDisplay.textContent = video.text;
+                    }
+                });
+                videoList.appendChild(li);
+            });
+        </script>
+    </body>
+</html>
